@@ -1,50 +1,22 @@
-import React from "react";
-import {
-  Gi3DStairs,
-  GiAbstract006,
-  GiAbstract009,
-  GiAbstract023,
-  GiAbstract059,
-} from "react-icons/gi";
-import Button from "./Button";
+import Accordion from "./components/Accordion";
 
 const App = () => {
-  const handleClick = () => {
-    console.log("clicked");
-  };
-
+  const items = [
+    {
+      id: "0",
+      label: "Mariam",
+      content: "Mariam is first child in her family bla bla bla bla",
+    },
+    {
+      id: "1",
+      label: "Gvantsa",
+      content: "Gvantsa is middle child in her family",
+    },
+    { id: "2", label: "Nene", content: "Nene is last child in her family" },
+  ];
   return (
     <div>
-      <div>
-        <Button success rounded className="mb-5" outline onClick={handleClick}>
-          Hi there
-          <Gi3DStairs />
-        </Button>
-      </div>
-      <div>
-        <Button danger outline onMouseEnter={handleClick}>
-          Mariam
-          <GiAbstract006 />
-        </Button>
-      </div>
-      <div>
-        <Button warning>
-          LOL
-          <GiAbstract009 />
-        </Button>
-      </div>
-      <div>
-        <Button secondary outline>
-          It's Fun
-          <GiAbstract023 />
-        </Button>
-      </div>
-      <div>
-        <Button primary outline rounded>
-          click
-          <GiAbstract059 />
-        </Button>
-      </div>
+      <Accordion items={items} />
     </div>
   );
 };
