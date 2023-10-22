@@ -9,6 +9,10 @@ const Accordion = ({ items }) => {
     expendedIndex === nextIndex
       ? setExpendedIndex(-1)
       : setExpendedIndex(nextIndex);
+
+    // setExpendedIndex((currentExpendedIndex) => {
+    //   return currentExpendedIndex === nextIndex ? -1 : nextIndex;
+    // });
   };
 
   const renderedItems = items.map((item, index) => {
