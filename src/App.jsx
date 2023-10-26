@@ -1,8 +1,14 @@
-import React from "react";
+import { useState } from "react";
 import Dropdown from "./components/Dropdown";
 
 const App = () => {
-  const options = [
+  const [selection, setSelection] = useState(null);
+
+  const handleSelect = (option) => {
+    setSelection(option);
+  };
+
+  const opts = [
     {
       label: "Red",
       value: "red",
@@ -19,7 +25,7 @@ const App = () => {
 
   return (
     <div>
-      <Dropdown options={options} />
+      <Dropdown options={opts} value={selection} onChange={handleSelect} />
     </div>
   );
 };
