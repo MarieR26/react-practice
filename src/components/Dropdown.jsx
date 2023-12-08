@@ -1,36 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
+import Panel from "./Panel";
 
 const Dropdown = ({ options, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const divEl = useRef();
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (!divEl.current) {
+        return;
+      }
+      // console.log(event.target);
+      if (!divEl.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handler, true);
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, []);
 
   const handleClick = () => {
-    //toggle true/false
     setIsOpen(!isOpen);
   };
 
   const handleOptionClick = (option) => {
     setIsOpen(false);
-    //which event did the user choose:
     onChange(option);
   };
 
   const renderedOptions = options.map((option) => {
     return (
-      <div onClick={() => handleOptionClick(option)} key={option.value}>
+      <div
+        className="hover:bg-sky-100 hover:text-black rounded cursor-pointer p-1"
+        onClick={() => handleOptionClick(option)}
+        key={option.value}
+      >
         {option.label}
       </div>
     );
   });
 
-  //  let content = "Select...";
-  // if (selection) {
-  //   content = selection.label;
-  // }
-
   return (
-    <div>
-      <div onClick={handleClick}>{value?.label || "Select..."}</div>
-      {isOpen && <div>{renderedOptions}</div>}
+    <div ref={divEl} className="w-48 relative">
+      <Panel
+        className="flex justify-between items-center cursor-pointer "
+        onClick={handleClick}
+      >
+        {value?.label || "Select..."}
+        {isOpen ? <RiArrowUpSFill /> : <RiArrowDownSFill />}
+      </Panel>
+      {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
     </div>
   );
 };
