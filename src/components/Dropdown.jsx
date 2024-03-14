@@ -47,7 +47,7 @@ const Dropdown = ({ options, value, onChange }) => {
   return (
     <div ref={divEl} className="w-48 relative">
       <Panel
-        className="flex justify-between items-center cursor-pointer "
+        className="flex justify-between items-center cursor-pointer flex-row "
         onClick={handleClick}
       >
         {value?.label || "Select..."}
